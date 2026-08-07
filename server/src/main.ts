@@ -7,6 +7,7 @@ import { glob } from "node:fs/promises";
 import fastifyStatic from "@fastify/static";
 import fastifyCookie from "@fastify/cookie";
 import fastifyJwt from "@fastify/jwt";
+import fastifyMultipart from "@fastify/multipart";
 
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -44,6 +45,13 @@ await fastify.register(fastifyJwt, {
     cookie: {
         cookieName: "token",
         signed: false
+    }
+})
+
+// --- Plugin: multipart ---
+await fastify.register(fastifyMultipart, {
+    limits: {
+        fieldSize: 50 * 1024 * 1024 // 50MB
     }
 })
 
