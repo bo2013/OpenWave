@@ -1,7 +1,7 @@
 import type { FastifyRequest, FastifyReply, RouteOptions } from "fastify"
 
-import { auth } from "../../../middleware/auth.ts"
-import { fb_songs } from "../../../firebase.ts"
+import { auth } from "../../../../middleware/auth.ts"
+import { fb_songs } from "../../../../firebase.ts"
 
 export default {
     method: "GET",
