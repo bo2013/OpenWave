@@ -1,15 +1,19 @@
 import type { User } from "../types"
 
-import { fb_users, fb_emailmapping } from "../firebase.ts"
+import { fb_users } from "../firebase.ts"
 
 export async function GetUserByEmail(email: string): Promise<User | undefined> {
-    const emailDoc = await fb_emailmapping.doc(email).get()
+    const snapshot = await fb_users.where("email", "==", email).limit(1).get()
 
-    if (!emailDoc.exists) {
+    if (snapshot.empty) {
         return undefined
     }
 
-    return GetUserByUUID(emailDoc.get("uid"))
+    const doc = snapshot.docs[0]
+    return {
+        uid: doc.id,
+        ...doc.data()
+    } as User
 }
 
 export async function GetUserByUUID(uid: string): Promise<User | undefined> {

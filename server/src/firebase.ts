@@ -12,5 +12,4 @@ export const app = initializeApp({
 export const db = getFirestore(app)
 
 export const fb_users = db.collection("users")
-export const fb_emailmapping = db.collection("EmailMapping")
 export const fb_songs = db.collection("songs")

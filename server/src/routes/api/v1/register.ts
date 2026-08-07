@@ -6,7 +6,7 @@ import { GetUserByEmail } from "../../../services/user.ts"
 import config from "../../../../config.json" with { type: "json" };
 import { CheckPassword, PasswordInfo } from "@openwave/password";
 import crypto from "node:crypto"
-import { fb_users, fb_emailmapping } from "../../../firebase.ts"
+import { fb_users } from "../../../firebase.ts"
 import argon2 from "argon2"
 import Cookie from "../../../Cookie.ts";
 
@@ -39,10 +39,6 @@ async function handler(request: FastifyRequest, reply: FastifyReply) {
         passwordHash: await argon2.hash(password),
         createdAt: Date.now(),
         isAdmin: false
-    })
-
-    await fb_emailmapping.doc(email).set({
-        uid
     })
 
     // Final: Set user id into cookie
