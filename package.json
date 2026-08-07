@@ -3,7 +3,8 @@
   "workspaces": [
     "client",
     "server",
-    "password"
+    "password",
+    "types"
   ],
   "scripts": {
     "lint": "eslint .",
@@ -22,5 +23,8 @@
     "globals": "^17.9.0",
     "jiti": "^2.7.0",
     "typescript-eslint": "^8.65.0"
+  },
+  "dependencies": {
+    "@openwave/types": "^1.0.0"
   }
 }
