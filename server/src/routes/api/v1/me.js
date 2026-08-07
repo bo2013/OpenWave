@@ -20,7 +20,9 @@ async function handler(request) {
         }
     }
 
-    const { passwordHash: _, ...user } = doc.data()
+    const user = doc.data()
+
+    delete user.passwordHash
 
     return {
         success: true,
