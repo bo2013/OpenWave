@@ -53,7 +53,7 @@ export function Home() {
                 name: "AnythingBecomeMoe"
             }
         ],
-        sound: "http://localhost:4533/rest/getTranscodeStream?u=boo2013&t=fcd7ee40f0b8df46b428d483b0aec4c3&s=14c926&f=json&v=1.8.0&c=NavidromeUI&mediaId=dm6tT0kUeW08zmBWFdhedk&mediaType=song&transcodeParams=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcCI6dHJ1ZSwiZXhwIjoxNzg2MDI0NzI0LCJpc3MiOiJORCIsIm1pZCI6ImRtNnRUMGtVZVcwOHptQldGZGhlZGsiLCJ1YSI6MTc4NTU4NTg0N30.jRBD1xthM6sTIEm69_n3Z7DRDbeYa8F7kH4ynWz3gtw"
+        sound: "http://localhost:4533/rest/getTranscodeStream?u=boo2013&t=fcd7ee40f0b8df46b428d483b0aec4c3&s=14c926&f=json&v=1.8.0&c=NavidromeUI&mediaId=dm6tT0kUeW08zmBWFdhedk&mediaType=song&transcodeParams=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcCI6dHJ1ZSwiZXhwIjoxNzg2MjY1NjI1LCJpc3MiOiJORCIsIm1pZCI6ImRtNnRUMGtVZVcwOHptQldGZGhlZGsiLCJ1YSI6MTc4NTU4NTg0N30.gn7bTOZY8Wcyxq9SyeW5FroXQyWutB3ifAcAV3wiNWQ"
     }
 
     return (
