@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Outlet } from "react-router-dom"
 import { Navbar, MediaPlayer } from "."
 import { PlayerContext } from "../contexts/player"
-import type { SongInfo } from "../types"
+import type { SongInfo } from "@openwave/types"
 
 export function AppLayout() {
     const [musicInfo, setMusicInfo] = useState<SongInfo | null>(null);

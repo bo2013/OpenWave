@@ -1,4 +1,4 @@
-import type { SongInfo } from "../types";
+import type { SongInfo } from "@openwave/types";
 
 import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";

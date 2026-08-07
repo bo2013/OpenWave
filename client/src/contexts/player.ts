@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 
-import type { SongInfo } from "../types";
+import type { SongInfo } from "@openwave/types";
 import { createContext } from "react";
 
 export interface PlayerContextType {
