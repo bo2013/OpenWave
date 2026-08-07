@@ -1,20 +1,21 @@
-import type { FastifyRequest, FastifyReply } from "fastify"
-import type { AuthBody, ApiRoute } from "../../../../types.ts"
+import type { FastifyRequest, FastifyReply, RouteOptions } from "fastify"
+import type { AuthBody } from "../../../types.ts"
 
-import { authBodySchema } from "../../../../schemas.ts"
-import { GetUserByEmail } from "../../../../services/user.ts"
-import config from "../../../../../config.json" with { type: "json" };
+import { authBodySchema } from "../../../schemas.ts"
+import { GetUserByEmail } from "../../../services/user.ts"
+import config from "../../../../config.json" with { type: "json" };
 import { CheckPassword, PasswordInfo } from "@openwave/password";
 import crypto from "node:crypto"
-import { fb_users, fb_emailmapping } from "../../../../firebase.ts"
+import { fb_users, fb_emailmapping } from "../../../firebase.ts"
 import argon2 from "argon2"
-import Cookie from "../../../../Cookie.ts";
+import Cookie from "../../../Cookie.ts";
 
 export default {
     method: "POST",
+    url: "/api/v1/auth/register",
     schema: authBodySchema,
     handler
-} satisfies ApiRoute
+} satisfies RouteOptions
 
 async function handler(request: FastifyRequest, reply: FastifyReply) {
     const {email, password} = request.body as AuthBody

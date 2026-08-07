@@ -1,11 +1,11 @@
-import type { FastifyRequest, FastifyReply } from "fastify"
-import type { ApiRoute } from "../../../../types"
-import Cookie from "../../../../Cookie.ts"
+import type { FastifyRequest, FastifyReply, RouteOptions } from "fastify"
+import Cookie from "../../../Cookie.ts"
 
 export default {
     method: "POST",
+    url: "/api/v1/auth/logout",
     handler
-} satisfies ApiRoute
+} satisfies RouteOptions
 
 async function handler(request: FastifyRequest, reply: FastifyReply) {
     new Cookie(reply).clear()

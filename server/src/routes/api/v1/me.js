@@ -1,8 +1,9 @@
-import { auth } from "../../../../middleware/auth.ts"
-import { fb_users } from "../../../../firebase.ts"
+import { auth } from "../../../middleware/auth.ts"
+import { fb_users } from "../../../firebase.ts"
 
 export default {
     method: "GET",
+    url: "/api/v1/auth/me",
     handler,
     preHandler: auth
 }

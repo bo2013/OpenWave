@@ -55,16 +55,10 @@ await fastify.register(fastifyJwt, {
 const routesDir = path.join(__dirname, "routes")
 
 for await (const file of glob(path.join(routesDir, "**/*.{ts,js}"))) {
+    process.stdout.write(pathToFileURL(file).href + ": ")
     const { default: route } = await import(pathToFileURL(file).href)
-
-    const url = "/" +
-        path
-            .relative(routesDir, file)
-            .replace(/\\/g, "/")       // Windows
-            .replace(/\.(ts|js)$/, "") // .ts / .js
-    // .replace(/\/index$/, "")   // Not used
-
-    await fastify.route({ ...route, url })
+    console.log(route.url)
+    fastify.route({ ...route })
 }
 
 fastify.setNotFoundHandler((request, reply) => {

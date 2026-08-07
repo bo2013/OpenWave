@@ -1,9 +1,10 @@
-import type { ApiRoute } from "../../../types"
+import type { RouteOptions } from "fastify"
 
 export default {
     method: "GET",
+    url: "/api/v1/health",
     handler
-} satisfies ApiRoute
+} satisfies RouteOptions
 
 async function handler() {
     return { status: "ok" }
