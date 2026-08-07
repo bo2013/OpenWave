@@ -1,8 +1,12 @@
 import type { FastifyRequest, FastifyReply, RouteOptions } from "fastify"
 
+import { auth } from "../../../../middleware/auth.ts"
+import { createReadStream } from "node:fs";
+
 export default {
-    method: "POST",
+    method: "GET",
     url: "/api/v1/data/songs/file",
+    onRequest: auth,
     handler
 } satisfies RouteOptions
 

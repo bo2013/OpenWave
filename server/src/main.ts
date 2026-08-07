@@ -57,7 +57,7 @@ const routesDir = path.join(__dirname, "routes")
 for await (const file of glob(path.join(routesDir, "**/*.{ts,js}"))) {
     process.stdout.write(pathToFileURL(file).href + ": ")
     const { default: route } = await import(pathToFileURL(file).href)
-    console.log(route.url)
+    console.log(route.method , route.url)
     fastify.route({ ...route })
 }
 
@@ -71,4 +71,8 @@ fastify.setNotFoundHandler((request, reply) => {
     return reply.sendFile("index.html");
 });
 
-await fastify.listen({ port: 3000 })
+const port = 3000
+
+console.log("\nStarting server at port", port)
+
+await fastify.listen({ port })

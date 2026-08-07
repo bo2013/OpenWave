@@ -1,36 +1,33 @@
-import type { FastifyRequest, RouteOptions } from "fastify"
+import type { FastifyRequest, RouteOptions } from "fastify";
 
-import { auth } from "../../../middleware/auth.ts"
-import { fb_users } from "../../../firebase.ts"
+import { auth } from "../../../middleware/auth.ts";
+import { GetUserByUUID } from "../../../services/user.ts";
 
 export default {
-    method: "GET",
-    url: "/api/v1/auth/me",
-    handler,
-    preHandler: auth
-} satisfies RouteOptions
+  method: "GET",
+  url: "/api/v1/auth/me",
+  handler,
+  preHandler: auth,
+} satisfies RouteOptions;
 
 async function handler(request: FastifyRequest) {
-    const uid = request.user.sub
+  const uid = request.user.sub;
 
-    const doc = await fb_users.doc(uid).get()
+  const user = await GetUserByUUID(uid);
 
-    if (!doc.exists) {
-        return {
-            success: false,
-            code: "USER_NOT_FOUND"
-        }
-    }
-
-    const user = doc.data()!
-
-    delete user.passwordHash
-
+  if (!user) {
     return {
-        success: true,
-        user: {
-            uid,
-            ...user
-        }
-    }
+      success: false,
+      code: "USER_NOT_FOUND",
+    };
+  }
+
+  const { passwordHash: _passwordHash, ...safeUser } = user;
+
+  return {
+    success: true,
+    user: {
+      ...safeUser,
+    },
+  };
 }
