@@ -1,0 +1,17 @@
+{
+    "folders": [
+        // {
+        //     "name": "SPCK JSA13",
+        //     "path": "/mnt/d/MINDX-JSA13/SPCK"
+        // },
+        {
+            "path": "./client"
+        },
+        {
+            "path": "./server"
+        },
+        {
+            "path": "./password"
+        }
+    ]
+}

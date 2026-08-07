@@ -1,0 +1,6 @@
+**/node_modules/**
+**/dist/**
+**/public/**
+serviceAccount.json
+dumpsrc.txt
+eslint.log
