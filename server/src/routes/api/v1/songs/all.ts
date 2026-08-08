@@ -5,7 +5,7 @@ import { fb_songs } from "../../../../firebase.ts"
 
 export default {
     method: "GET",
-    url: "/api/v1/data/songs/all",
+    url: "/api/v1/songs/all",
     handler,
     onRequest: auth
 } satisfies RouteOptions

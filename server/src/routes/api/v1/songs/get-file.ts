@@ -5,7 +5,7 @@ import { createReadStream } from "node:fs";
 
 export default {
     method: "GET",
-    url: "/api/v1/data/songs/file",
+    url: "/api/v1/songs/file/:uuid",
     onRequest: auth,
     handler
 } satisfies RouteOptions
