@@ -10,15 +10,9 @@ import fastifyJwt from "@fastify/jwt";
 import fastifyMultipart from "@fastify/multipart";
 
 import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { pathToFileURL } from "node:url";
 
-// ===============================================
-// Setup
-// ===============================================
-
-// --- Paths ---
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { __dirname, __filename } from "./paths.ts"
 
 // ===============================================
 // Fastify

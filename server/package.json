@@ -16,6 +16,7 @@
     "argon2": "^0.45.1",
     "fastify": "^5.8.5",
     "file-type": "^22.0.1",
-    "firebase-admin": "^14.2.0"
+    "firebase-admin": "^14.2.0",
+    "music-metadata": "^11.14.0"
   }
 }

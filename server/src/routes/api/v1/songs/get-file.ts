@@ -11,5 +11,7 @@ export default {
 } satisfies RouteOptions
 
 async function handler(request: FastifyRequest, reply: FastifyReply) {
+    const { uuid } = request.params as { uuid: string };
+
     
 }
