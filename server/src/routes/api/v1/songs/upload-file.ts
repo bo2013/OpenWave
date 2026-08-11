@@ -12,9 +12,5 @@ export default {
 } satisfies RouteOptions
 
 async function handler(request: FastifyRequest, reply: FastifyReply) {
-    const parts = request.parts();
-
-    for await (const part of parts) {
-        
-    }
+    // TODO: Nhận multipart từ admin và lưu file vào __dirname/assets/songs/<uuid>, dùng node:crypto để random uuid
 }

@@ -13,5 +13,5 @@ export default {
 async function handler(request: FastifyRequest, reply: FastifyReply) {
     const { uuid } = request.params as { uuid: string };
 
-    
+    // TODO: Đọc file bằng createReadStream (lấy file tại __dirname/assets/songs/<uuid>)
 }
