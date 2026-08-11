@@ -2,6 +2,9 @@ import type { FastifyRequest, FastifyReply, RouteOptions } from "fastify"
 
 import { auth } from "../../../../middleware/auth.ts"
 import { createReadStream } from "node:fs";
+import { existsSync } from "node:fs";
+import { __dirname } from "../../../../paths.ts"
+import path from "node:path";
 
 export default {
     method: "GET",
@@ -13,5 +16,12 @@ export default {
 async function handler(request: FastifyRequest, reply: FastifyReply) {
     const { uuid } = request.params as { uuid: string };
 
-    // TODO: Đọc file bằng createReadStream (lấy file tại __dirname/assets/songs/<uuid>)
+    const filePath = path.join(__dirname, "assets", "songs", uuid);
+
+    if (!existsSync(filePath)) {
+        return reply.code(404).send({ success: false, code: "FILE_NOT_FOUND" });
+    }
+
+    const stream = createReadStream(filePath);
+    return reply.send(stream);
 }
