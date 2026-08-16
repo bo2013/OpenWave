@@ -23,5 +23,8 @@ async function handler(request: FastifyRequest, reply: FastifyReply) {
     }
 
     const stream = createReadStream(filePath);
+
+    // TODO: dùng file-type detect rồi chỉnh dòng dưới add MIME type
+
     return reply.send(stream);
 }
