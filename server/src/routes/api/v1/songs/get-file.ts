@@ -2,9 +2,10 @@ import type { FastifyRequest, FastifyReply, RouteOptions } from "fastify"
 
 import { auth } from "../../../../middleware/auth.ts"
 import { createReadStream, existsSync } from "node:fs";
+import { open } from "node:fs/promises"
 import { __dirname } from "../../../../paths.ts"
 import path from "node:path";
-import { fileTypeFromStream } from "file-type";
+import { fileTypeFromBuffer } from "file-type";
 
 export default {
     method: "GET",
@@ -22,15 +23,21 @@ async function handler(request: FastifyRequest, reply: FastifyReply) {
         return reply.code(404).send({ success: false, code: "FILE_NOT_FOUND" });
     }
 
-    const stream = createReadStream(filePath);
-    const fileType = await fileTypeFromStream(stream);
+    const file = await open(filePath)
 
-    if (!fileType) {
-        stream.destroy();
-        return reply.code(415).send({ success: false, code: "UNKNOWN_FILE_TYPE" });
+    try {
+        const buffer = Buffer.alloc(4100)
+        const { bytesRead } = await file.read(buffer, 0, buffer.length, 0)
+        const fileType = await fileTypeFromBuffer(buffer.subarray(0, bytesRead))
+
+        if (!fileType) {
+            return reply.code(415).send({ success: false, code: "UNKNOWN_FILE_TYPE" });
+        }
+
+        return reply
+            .type(fileType.mime)
+            .send(createReadStream(filePath));
+    } finally {
+        await file.close()
     }
-
-    return reply
-        .type(fileType.mime)
-        .send(stream);
 }
