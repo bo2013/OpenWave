@@ -22,15 +22,10 @@ export default {
 async function handler(request: FastifyRequest, reply: FastifyReply) {
     const snapshot = await fb_songs.get()
 
-    const songs = snapshot.docs.map(doc => {
-        const data = doc.data() as SongDoc
+    const songs: Record<string, SongDoc> = {}
 
-        return {
-            id: doc.id,
-            name: data.name,
-            image: data.image,
-            artists: data.artists
-        }
+    snapshot.docs.forEach(doc => {
+        songs[doc.id] = doc.data() as SongDoc
     })
 
     return reply.send(songs)
