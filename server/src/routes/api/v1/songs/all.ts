@@ -20,14 +20,18 @@ export default {
 } satisfies RouteOptions
 
 async function handler(request: FastifyRequest, reply: FastifyReply) {
-    const snapshot = await fb_songs.get<SongDoc>()
+    const snapshot = await fb_songs.get()
 
-    const songs = snapshot.docs.map(doc => ({
-        id: doc.id,
-        name: doc.data().name,
-        image: doc.data().image,
-        artists: doc.data().artists
-    }))
+    const songs = snapshot.docs.map(doc => {
+        const data = doc.data() as SongDoc
+
+        return {
+            id: doc.id,
+            name: data.name,
+            image: data.image,
+            artists: data.artists
+        }
+    })
 
     return reply.send(songs)
 }
