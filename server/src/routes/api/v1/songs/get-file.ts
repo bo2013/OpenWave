@@ -1,10 +1,10 @@
 import type { FastifyRequest, FastifyReply, RouteOptions } from "fastify"
 
 import { auth } from "../../../../middleware/auth.ts"
-import { createReadStream } from "node:fs";
-import { existsSync } from "node:fs";
+import { createReadStream, existsSync } from "node:fs";
 import { __dirname } from "../../../../paths.ts"
 import path from "node:path";
+import { fileTypeFromStream } from "file-type";
 
 export default {
     method: "GET",
@@ -23,8 +23,14 @@ async function handler(request: FastifyRequest, reply: FastifyReply) {
     }
 
     const stream = createReadStream(filePath);
+    const fileType = await fileTypeFromStream(stream);
 
-    // TODO: dùng file-type detect rồi chỉnh dòng dưới add MIME type
+    if (!fileType) {
+        stream.destroy();
+        return reply.code(415).send({ success: false, code: "UNKNOWN_FILE_TYPE" });
+    }
 
-    return reply.send(stream);
+    return reply
+        .type(fileType.mime)
+        .send(stream);
 }
