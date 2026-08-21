@@ -5,7 +5,8 @@ import { isAdmin } from "../../../../middleware/isAdmin.ts"
 import { validateFileType } from "../../../../middleware/validateFileType.ts"
 import { __dirname } from "../../../../paths.ts"
 import { randomUUID } from "node:crypto"
-import { createWriteStream, mkdirSync, rename, unlink } from "node:fs"
+import { createWriteStream, mkdirSync } from "node:fs"
+import { rename, unlink } from "node:fs/promises" // Fixed: imported from node:fs/promises
 import { pipeline } from "node:stream/promises"
 import path from "node:path"
 
